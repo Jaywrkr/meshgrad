@@ -1,0 +1,221 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- Primary Meta Tags -->
+<meta name="title" content="MESH - Create beautiful gradients">
+<meta name="description" content="Create beautiful gradients right in your browser">
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://meshgradient.com">
+<meta property="og:title" content="MESH - Create beautiful gradients">
+<meta property="og:description" content="Create beautiful gradients right in your browser">
+<meta property="og:image" content="social.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://meshgradient.com">
+<meta property="twitter:title" content="MESH - Create beautiful gradients">
+<meta property="twitter:description" content="Create beautiful gradients right in your browser">
+<meta property="twitter:image" content="https://meshgradient.com/social.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+    <title>Mesh | Create beautiful mesh gradients</title>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="tooltip.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <script type="text/javascript" src="dialog.js"></script>
+    <script type="text/javascript" src="m.min.js"></script>
+    <script src="smoke_vertex.glsl" id="smoke_vertex" type="x-shader/x-vertex"></script>
+    <script src="smoke_fragment.glsl" id="smoke_fragment" type="x-shader/x-fragment"></script>
+    <script src="vertex.glsl" id="warp_vertex" type="x-shader/x-vertex"></script>
+    <script src="fragment.glsl" id="warp_fragment" type="x-shader/x-fragment"></script>
+    <script src="point_vertex.glsl" id="point_vertex" type="x-shader/x-vertex"></script>
+    <script src="point_fragment.glsl" id="point_fragment" type="x-shader/x-fragment"></script>
+  </head>
+  <body onload="init()">
+    <div class="mobile">
+      <img src="logo-sm.svg" />
+      <h1>Mesh is best viewed on desktop</h1>
+      <a target="_blank" style="color:#FFD0C5" href="https://twitter.com/intent/tweet?screen_name=deadlocked_d&ref_src=twsrc%5Etfw&status=%40deadlocked_d%20Stop%20being%20lazy%20and%20add%20mobile%20%F0%9F%98%A1">Complain about it</a></span>
+    </div>
+    <div class="gallery">
+      <button onClick="toggleGallery()">Back</button>
+      <h1>Gallery </h1>
+      <p>Click on a gradient to view and edit it <a id="submit-mesh">Submit your mesh</a></p>
+      <div class="gallery__wrapper">
+
+      </div>
+    </div>
+    <a style="transform: scale(.75); position: fixed; bottom: 2.6rem; left: 1rem;" href="https://www.producthunt.com/posts/mesh-gradient?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-mesh-gradient" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=186483&theme=dark" alt="Mesh Gradient - Create beautiful gradients | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" /></a>
+    <dialog id="export-dialog">
+      <h1>
+        Info
+      </h1>
+      <div class="inner">
+      </div>
+    </dialog>
+    <dialog id="info-dialog">
+        <h1>
+          Info
+        </h1>
+        <div class="inner">
+            <strong>Mesh</strong> is a simple way to create beautiful gradients using <strong>WebGL shaders</strong>.
+            <br /><br />
+            <strong>Click</strong> anywhere to add a point and <strong>drag</strong> to warp the effects of the gradient.
+            <br /><br />
+            <strong>Shift + left click</strong> to remove a point.
+            <br /><br />
+            <strong>Cmd/Ctrl + Z (+ Shift)</strong> to undo and redo.
+            <br /><br />
+
+
+            <p>
+              Created by <a target="_blank" href="https://burakaslan.me/">Burak Aslan</a>
+            </p>
+
+            <div class="settings">
+              <h5>Settings</h5>
+              <div>
+              Aspect ratio
+                <select id="aspect-ratio">
+                  <option value="0">1:1</option>
+                  <option value="1">2:1</option>
+                  <option value="2">1:2</option>
+                  <option value="3">16:9</option>
+                </select>
+              </div>
+            </div>
+            <br /><br />
+
+            <span style="border-radius: 10px; padding: .5rem 1rem; background: rgb(2, 2, 2);">Create something neat? <a target="_blank" style="color:#FFD0C5" href="https://twitter.com/intent/tweet?screen_name=deadlocked_d&ref_src=twsrc%5Etfw">Send me a tweet!</a></span>
+            <br />
+            <div style="margin-top: 2rem; justify-content: space-between; width: 100%; align-items: center; display:flex;">
+              <button onClick="toggleInfo()" value="cancel" >
+                Close
+              </button>
+              <a href="mailto:burak@meshgradient.com">
+                Report problem
+              </a>
+            </div>
+        </div>
+    </dialog>
+    <div class="header">
+      <div>
+        <img src="logo.svg" /><span class="beta">BETA</span c>
+      </div>
+      <div>
+        <button aria-label="Randomize colors" data-balloon-pos="down" onClick="refresh()" class="icon-btn tool"><img src="refresh.svg" /></button>
+        <button aria-label="Reset mesh" data-balloon-pos="down" onClick="clearUrl()" class="icon-btn"><img src="trash.svg" /></button>
+        <button aria-label="View gallery" data-balloon-pos="down" onClick="toggleGallery()" class="icon-btn"><img src="images.svg" /></button>
+        <button aria-label="More info" data-balloon-pos="down" onClick="toggleInfo()" class="icon-btn"><img src="info.svg" /></button>
+        <a class="export-btn">Export</a>
+      </div>
+    </div>
+    <canvas style="position: fixed; right: 100%;" id="canvas3" width="2000px" height="2000px"></canvas>
+    <div id="welcome">
+      <div>
+        <img class="logo-sm" src="logo-sm.svg" />
+        <h1>Welcome to <strong>Mesh</strong></h1>
+        <p>Mesh is a simple way to create beautiful, unique gradients using shaders</p>
+        <button onClick="startTut()">Get started</button>
+      </div>
+      <div class="showcase">
+        <div>
+          <div>
+            <img src="gallery/1.png" />
+            <img src="gallery/2.png" />
+            <img src="gallery/3.png" />
+            <img src="gallery/6.png" />
+          </div>
+          <div>
+            <img src="gallery/1.png" />
+            <img src="gallery/2.png" />
+            <img src="gallery/3.png" />
+            <img src="gallery/6.png" />
+          </div>
+        </div>
+        <div>
+          <div>
+            <img src="gallery/4.png" />
+            <img src="gallery/5.png" />
+            <img src="gallery/2.png" />
+            <img src="gallery/9.png" />
+          </div>
+          <div>
+            <img src="gallery/4.png" />
+            <img src="gallery/5.png" />
+            <img src="gallery/2.png" />
+            <img src="gallery/9.png" />
+          </div>
+        </div>
+        <div>
+          <div>
+            <img src="gallery/6.png" />
+            <img src="gallery/7.png" />
+            <img src="gallery/4.png" />
+            <img src="gallery/8.png" />
+          </div>
+          <div>
+            <img src="gallery/6.png" />
+            <img src="gallery/7.png" />
+            <img src="gallery/4.png" />
+            <img src="gallery/8.png" />
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="body">
+   
+      <div id="tut1">
+        <canvas id="canvas1" width="100px" height="100px"></canvas>
+      </div>
+      <span class="tutorial">
+        <div class="t1" style="opacity: 1;">
+          <h1>
+            Input points
+          </h1>
+          <p>
+            These points will determine what color to show on the ouput
+          </p>
+          <button onClick='nextTut()'>Continue</button>
+        </div>
+        <div class="t2" >
+          <h1>
+            Output points
+          </h1>
+          <p>
+            This will be your final design that allows warping. Hold Shift + Click to remove points
+          </p>
+          <button onClick='nextTut()'>Continue</button>
+        </div>
+      </span>
+      <div id="tut2">
+        <canvas id="canvas2" width="100px" height="100px"></canvas>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="btn-group">
+        
+      </div>
+    </div>
+  </body>
+</html>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158907093-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158907093-1');
+</script>

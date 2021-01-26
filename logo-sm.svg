@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="20px" viewBox="0 0 30 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>logo copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="-5.64878066%" y1="50.1005686%" x2="94.2487807%" y2="50.1005686%" id="linearGradient-1">
+            <stop stop-color="#376DF9" offset="0%"></stop>
+            <stop stop-color="#D262B4" offset="46.208%"></stop>
+            <stop stop-color="#FF8D74" offset="77.058%"></stop>
+            <stop stop-color="#FFD4CA" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="logo-copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Rectangle" fill="url(#linearGradient-1)" fill-rule="nonzero" opacity="0.75" points="0 0 26 0 0 20"></polygon>
+        <polygon id="Rectangle-Copy-2" fill="url(#linearGradient-1)" fill-rule="nonzero" opacity="0.61437407" transform="translate(17.000000, 10.000000) scale(-1, 1) translate(-17.000000, -10.000000) " points="4 0 30 0 4 20"></polygon>
+    </g>
+</svg>
